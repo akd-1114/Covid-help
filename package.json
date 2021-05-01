@@ -1,7 +1,7 @@
 {
-	"name": "material-dashboard-react",
+	"name": "covid-help",
 	"version": "1.9.0",
-	"description": "Material Dashboard React. Coded by Creative Tim",
+	"description": "Covid Help React. Coded by Akashdeep",
 	"private": false,
 	"main": "dist/index.js",
 	"dependencies": {
@@ -37,15 +37,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
+		"url": "git+https://github.com/akd-1114/Covid-help"
 	},
 	"keywords": [],
-	"author": "Creative Tim <hello@creative-tim.com> (https://www.creative-tim.com/)",
+	"author": "Akashdeep",
 	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
-	},
-	"homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
 	"optionalDependencies": {
 		"@types/googlemaps": "3.39.6",
 		"@types/markerclustererplus": "2.1.33",
