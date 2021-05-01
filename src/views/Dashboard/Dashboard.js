@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
+import _ from "lodash";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
+import tweetData from "../../dummy/data.json";
 // @material-ui/icons
 // import Icon from "@material-ui/core/Icon";
 
@@ -90,12 +92,35 @@ const dummyData = {
 export default function Dashboard() {
 	const classes = useStyles();
 	const [city, setCity] = useState("");
+	const [cityArray, setCityArray] = useState([]);
 
 	const handleChange = (e) => {
 		setCity(e.target.value);
 	};
 
-	console.log("City", city, dummyData[city]);
+	useEffect(() => {
+		const temp = Object.keys(tweetData.data).map((val) => val);
+		// console.log("Temp", temp);
+		setCityArray(temp);
+	}, []);
+
+	// useEffect(() => {
+	// 	fetch("http://13.234.203.121:5000/", {
+	// 		mode: "no-cors",
+	// 		// method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 	})
+	// 		.then((res) => {
+	// 			console.log("Result", res);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log("Error", err);
+	// 		});
+	// });
+
+	console.log("City", city, dummyData[city], tweetData.data);
 
 	return (
 		<div>
@@ -108,23 +133,44 @@ export default function Dashboard() {
 					value={city}
 					onChange={handleChange}
 				>
-					<MenuItem value="bangalore">Bangalore</MenuItem>
-					<MenuItem value="indore">Indore</MenuItem>
-					<MenuItem value="delhi">Delhi</MenuItem>
+					{cityArray &&
+						cityArray.map((name) => {
+							return <MenuItem value={name}>{name}</MenuItem>;
+						})}
 				</Select>
 			</FormControl>
 
 			<div className="container-fluid" style={{ paddingTop: "20px" }}>
 				<div className="row">
 					{city &&
-						dummyData[city].map((val, key) => {
+						tweetData.data[city] &&
+						tweetData.data[city].tweets &&
+						tweetData.data[city].tweets.map((val, key) => {
 							console.log("key", key, val);
 							return (
 								<div className="col-6 pt-4" key={key}>
 									<Card>
 										<CardContent>
-											<Typography>{val.tweet}</Typography>
-											<Typography>{val.timestamp}</Typography>
+											<span style={{ display: "flex", overflow: "auto" }}>
+												<h6 className="mr-2">By:</h6>{" "}
+												<Typography>{_.get(val, "name")}</Typography>
+											</span>
+											<span style={{ display: "flex", overflow: "auto" }}>
+												<h6 className="mr-2">Tweet:</h6>{" "}
+												<Typography>{_.get(val, "tweet")}</Typography>
+											</span>
+											<span style={{ display: "flex", overflow: "auto" }}>
+												<h6 className="mr-2">Followers:</h6>{" "}
+												<Typography>{_.get(val, "followers")}</Typography>
+											</span>
+											<span style={{ display: "flex", overflow: "auto" }}>
+												<h6 className="mr-2">Location:</h6>{" "}
+												<Typography>{_.get(val, "location")}</Typography>
+											</span>
+											<span style={{ display: "flex", overflow: "auto" }}>
+												<h6 className="mr-2">Time:</h6>{" "}
+												<Typography>{_.get(val, "time")}</Typography>
+											</span>
 										</CardContent>
 									</Card>
 								</div>
