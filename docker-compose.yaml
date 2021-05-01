@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  covid-help-frontend:
+    image: covid-help-frontend
+    restart: unless-stopped
+    environment:
+     - PMA_ARBITRARY=1
+    ports:
+      - "3000:3000"
