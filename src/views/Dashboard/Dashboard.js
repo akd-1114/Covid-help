@@ -4,6 +4,7 @@ import _ from "lodash";
 import axios from "axios";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
+import { blue } from "@material-ui/core/colors";
 // import tweetData from "../../dummy/data.json";
 // @material-ui/icons
 // import Icon from "@material-ui/core/Icon";
@@ -14,8 +15,11 @@ import {
 	FormControl,
 	InputLabel,
 	Card,
+	CardHeader,
 	CardContent,
+	CardMedia,
 	Typography,
+	Avatar,
 } from "@material-ui/core";
 // core components
 
@@ -23,7 +27,30 @@ import {
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles({
+	...styles,
+	root: {
+		maxWidth: 345,
+		overflow: "auto",
+	},
+	media: {
+		height: 0,
+		paddingTop: "56.25%", // 16:9
+	},
+	expand: {
+		transform: "rotate(0deg)",
+		marginLeft: "auto",
+	},
+	expandOpen: {
+		transform: "rotate(180deg)",
+	},
+	avatar: {
+		backgroundColor: blue[500],
+	},
+	followers: {
+		float: "right",
+	},
+});
 
 export default function Dashboard() {
 	const classes = useStyles();
@@ -83,16 +110,64 @@ export default function Dashboard() {
 							console.log("key", key, val);
 							return (
 								<div className="col-6 pt-4" key={key}>
-									<Card>
+									<Card className={classes.root}>
+										<CardHeader
+											avatar={
+												<Avatar aria-label="tweet" className={classes.avatar}>
+													T
+												</Avatar>
+											}
+											title={_.get(val, "name")}
+											subheader={_.get(val, "time")}
+										/>
+
 										<CardContent>
-											<span style={{ display: "flex", overflow: "auto" }}>
+											<Typography
+												variant="body2"
+												color="textSecondary"
+												component="p"
+											>
+												{_.get(val, "tweet")}
+											</Typography>
+											<span style={{ display: "flex" }} className="pt-4">
 												<Typography variant="subtitle2" className="mr-2">
-													By:
+													You can also go to:
 												</Typography>{" "}
-												<Typography variant="body2">
-													{_.get(val, "name")}
+												<a
+													href={_.get(val, "Urls")}
+													target="_blank"
+													className={classes.block}
+												>
+													link
+												</a>
+											</span>
+
+											<span
+												style={{
+													display: "flex",
+													justifyContent: "space-between",
+												}}
+												className="p-4"
+											>
+												<Typography>
+													{_.get(val, "retweets")} retweets
+												</Typography>{" "}
+												<Typography>
+													{_.get(val, "followers")} followers
 												</Typography>
 											</span>
+										</CardContent>
+										{/* <CardActions disableSpacing>
+											<IconButton aria-label="add to favorites">
+												<FavoriteIcon />
+											</IconButton>
+											<IconButton aria-label="share">
+												<ShareIcon />
+											</IconButton>
+										</CardActions> */}
+									</Card>
+									{/* <Card>
+										<CardContent>
 											<span style={{ display: "flex", overflow: "auto" }}>
 												<Typography variant="subtitle2" className="mr-2">
 													Tweet:
@@ -101,22 +176,7 @@ export default function Dashboard() {
 													{_.get(val, "tweet")}
 												</Typography>
 											</span>
-											<span style={{ display: "flex", overflow: "auto" }}>
-												<Typography variant="subtitle2" className="mr-2">
-													Followers:
-												</Typography>{" "}
-												<Typography variant="body2">
-													{_.get(val, "followers")}
-												</Typography>
-											</span>
-											<span style={{ display: "flex", overflow: "auto" }}>
-												<Typography variant="subtitle2" className="mr-2">
-													tweet_location:
-												</Typography>{" "}
-												<Typography variant="body2">
-													{_.get(val, "tweet_location")}
-												</Typography>
-											</span>
+
 											<span style={{ display: "flex", overflow: "auto" }}>
 												<Typography variant="subtitle2" className="mr-2">
 													Time:
@@ -126,7 +186,7 @@ export default function Dashboard() {
 												</Typography>
 											</span>
 										</CardContent>
-									</Card>
+									</Card> */}
 								</div>
 							);
 						})}

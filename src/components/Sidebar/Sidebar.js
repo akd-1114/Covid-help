@@ -46,7 +46,7 @@ export default function Sidebar(props) {
 				});
 				return (
 					<NavLink
-						to={prop.layout + prop.path}
+						to={prop.layout}
 						className={activePro + classes.item}
 						activeClassName="active"
 						key={key}
@@ -115,7 +115,7 @@ export default function Sidebar(props) {
 				>
 					{brand}
 					<div className={classes.sidebarWrapper}>
-						{props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+						{/* {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />} */}
 						{links}
 					</div>
 					{image !== undefined ? (
