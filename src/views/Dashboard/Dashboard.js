@@ -64,7 +64,11 @@ export default function Dashboard() {
 				>
 					{cityArray &&
 						cityArray.map((name) => {
-							return <MenuItem value={name}>{name}</MenuItem>;
+							return (
+								<MenuItem value={name} key={name}>
+									{name}
+								</MenuItem>
+							);
 						})}
 				</Select>
 			</FormControl>
@@ -75,7 +79,6 @@ export default function Dashboard() {
 						dataSource &&
 						dataSource[city] &&
 						_.get(dataSource[city], "tweets").map((val, key) => {
-							console.log("key", key, val);
 							return (
 								<div className="col-6 pt-4" key={key}>
 									<Card>
@@ -106,7 +109,7 @@ export default function Dashboard() {
 											</span>
 											<span style={{ display: "flex", overflow: "auto" }}>
 												<Typography variant="subtitle2" className="mr-2">
-													Location:
+													tweet_location:
 												</Typography>{" "}
 												<Typography variant="body2">
 													{_.get(val, "location")}
