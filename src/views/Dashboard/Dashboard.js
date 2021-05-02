@@ -37,8 +37,9 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		axios
-			.get("http://13.234.203.121:5000/")
+			.get("https://devcovidhelperbackend.dev.cglcloud.in/")
 			.then((res) => {
+				console.log("Result", res);
 				const temp = _.get(res, "data.data");
 				setDataSource(temp);
 				const tempData = Object.keys(temp).map((val) => val);
@@ -79,6 +80,7 @@ export default function Dashboard() {
 						dataSource &&
 						dataSource[city] &&
 						_.get(dataSource[city], "tweets").map((val, key) => {
+							console.log("key", key, val);
 							return (
 								<div className="col-6 pt-4" key={key}>
 									<Card>
