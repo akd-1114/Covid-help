@@ -81,24 +81,44 @@ export default function Dashboard() {
 									<Card>
 										<CardContent>
 											<span style={{ display: "flex", overflow: "auto" }}>
-												<h6 className="mr-2">By:</h6>{" "}
-												<Typography>{_.get(val, "name")}</Typography>
+												<Typography variant="subtitle2" className="mr-2">
+													By:
+												</Typography>{" "}
+												<Typography variant="body2">
+													{_.get(val, "name")}
+												</Typography>
 											</span>
 											<span style={{ display: "flex", overflow: "auto" }}>
-												<h6 className="mr-2">Tweet:</h6>{" "}
-												<Typography>{_.get(val, "tweet")}</Typography>
+												<Typography variant="subtitle2" className="mr-2">
+													Tweet:
+												</Typography>{" "}
+												<Typography variant="body2">
+													{_.get(val, "tweet")}
+												</Typography>
 											</span>
 											<span style={{ display: "flex", overflow: "auto" }}>
-												<h6 className="mr-2">Followers:</h6>{" "}
-												<Typography>{_.get(val, "followers")}</Typography>
+												<Typography variant="subtitle2" className="mr-2">
+													Followers:
+												</Typography>{" "}
+												<Typography variant="body2">
+													{_.get(val, "followers")}
+												</Typography>
 											</span>
 											<span style={{ display: "flex", overflow: "auto" }}>
-												<h6 className="mr-2">Location:</h6>{" "}
-												<Typography>{_.get(val, "location")}</Typography>
+												<Typography variant="subtitle2" className="mr-2">
+													Location:
+												</Typography>{" "}
+												<Typography variant="body2">
+													{_.get(val, "location")}
+												</Typography>
 											</span>
 											<span style={{ display: "flex", overflow: "auto" }}>
-												<h6 className="mr-2">Time:</h6>{" "}
-												<Typography>{_.get(val, "time")}</Typography>
+												<Typography variant="subtitle2" className="mr-2">
+													Time:
+												</Typography>{" "}
+												<Typography variant="body2">
+													{_.get(val, "time")}
+												</Typography>
 											</span>
 										</CardContent>
 									</Card>
