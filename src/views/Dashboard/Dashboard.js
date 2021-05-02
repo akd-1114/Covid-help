@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
+// import moment from "moment";
 import _ from "lodash";
+import axios from "axios";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import tweetData from "../../dummy/data.json";
+// import tweetData from "../../dummy/data.json";
 // @material-ui/icons
 // import Icon from "@material-ui/core/Icon";
 
@@ -18,109 +19,37 @@ import {
 } from "@material-ui/core";
 // core components
 
-import { bugs, website, server } from "variables/general.js";
+// import { bugs, website, server } from "variables/general.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-const dummyData = {
-	bangalore: [
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-	],
-	delhi: [
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-	],
-	indore: [
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "it is a tweet",
-			timestamp: moment().format("llll"),
-		},
-		{
-			tweet: "which day it is?",
-			timestamp: moment().format("llll"),
-		},
-	],
-};
-
 export default function Dashboard() {
 	const classes = useStyles();
 	const [city, setCity] = useState("");
 	const [cityArray, setCityArray] = useState([]);
+	const [dataSource, setDataSource] = useState({});
 
 	const handleChange = (e) => {
 		setCity(e.target.value);
 	};
 
 	useEffect(() => {
-		const temp = Object.keys(tweetData.data).map((val) => val);
-		// console.log("Temp", temp);
-		setCityArray(temp);
+		axios
+			.get("http://13.234.203.121:5000/")
+			.then((res) => {
+				const temp = _.get(res, "data.data");
+				setDataSource(temp);
+				const tempData = Object.keys(temp).map((val) => val);
+				setCityArray(tempData);
+			})
+			.catch((err) => {
+				console.log("Error", err);
+			});
 	}, []);
 
-	// useEffect(() => {
-	// 	fetch("http://13.234.203.121:5000/", {
-	// 		mode: "no-cors",
-	// 		// method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 	})
-	// 		.then((res) => {
-	// 			console.log("Result", res);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log("Error", err);
-	// 		});
-	// });
-
-	console.log("City", city, dummyData[city], tweetData.data);
+	// console.log("City", city, dummyData[city], tweetData.data);
 
 	return (
 		<div>
@@ -143,9 +72,9 @@ export default function Dashboard() {
 			<div className="container-fluid" style={{ paddingTop: "20px" }}>
 				<div className="row">
 					{city &&
-						tweetData.data[city] &&
-						tweetData.data[city].tweets &&
-						tweetData.data[city].tweets.map((val, key) => {
+						dataSource &&
+						dataSource[city] &&
+						_.get(dataSource[city], "tweets").map((val, key) => {
 							console.log("key", key, val);
 							return (
 								<div className="col-6 pt-4" key={key}>
