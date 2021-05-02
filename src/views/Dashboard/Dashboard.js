@@ -114,7 +114,7 @@ export default function Dashboard() {
 													tweet_location:
 												</Typography>{" "}
 												<Typography variant="body2">
-													{_.get(val, "location")}
+													{_.get(val, "tweet_location")}
 												</Typography>
 											</span>
 											<span style={{ display: "flex", overflow: "auto" }}>
