@@ -31,18 +31,13 @@ export default function Sidebar(props) {
 			{routes.map((prop, key) => {
 				var activePro = " ";
 				var listItemClasses;
-				if (prop.path === "/upgrade-to-pro") {
-					activePro = classes.activePro + " ";
-					listItemClasses = classNames({
-						[" " + classes[color]]: true,
-					});
-				} else {
-					listItemClasses = classNames({
-						[" " + classes[color]]: activeRoute(prop.layout + prop.path),
-					});
-				}
+
+				listItemClasses = classNames({
+					[" " + classes[color]]: activeRoute(prop.layout),
+				});
+
 				const whiteFontClasses = classNames({
-					[" " + classes.whiteFont]: activeRoute(prop.layout + prop.path),
+					[" " + classes.whiteFont]: activeRoute(prop.layout),
 				});
 				return (
 					<NavLink
@@ -62,16 +57,12 @@ export default function Sidebar(props) {
 								</Icon>
 							) : (
 								<prop.icon
-									className={classNames(classes.itemIcon, whiteFontClasses, {
-										[classes.itemIconRTL]: props.rtlActive,
-									})}
+									className={classNames(classes.itemIcon, whiteFontClasses)}
 								/>
 							)}
 							<ListItemText
-								primary={props.rtlActive ? prop.rtlName : prop.name}
-								className={classNames(classes.itemText, whiteFontClasses, {
-									[classes.itemTextRTL]: props.rtlActive,
-								})}
+								primary={prop.name}
+								className={classNames(classes.itemText, whiteFontClasses)}
 								disableTypography={true}
 							/>
 						</ListItem>
