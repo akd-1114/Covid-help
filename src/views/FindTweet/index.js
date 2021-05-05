@@ -77,7 +77,12 @@ export default function FindTweet() {
 
 	useEffect(() => {
 		axios
-			.get("https://devcovidhelperbackend.dev.cglcloud.in/")
+			.get("https://devcovidhelperbackend.dev.cglcloud.in/search",
+				{
+					params: {
+						text: _.get(formData, "search-tweet")
+					}
+				})
 			.then((res) => {
 				console.log("Result", res);
 				const temp = _.get(res, "data.data");
