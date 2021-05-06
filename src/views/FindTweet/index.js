@@ -70,6 +70,7 @@ export default function FindTweet() {
 		setLoading(true);
 		console.log("Event", formData);
 		if (_.get(formData, "search-tweet")) {
+			setShowSelect(false);
 			setShowSelect(true);
 		}
 		setLoading(false);
