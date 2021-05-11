@@ -59,7 +59,7 @@ export default function TweetsSelectCards({ dataSource, cityArray, classes }) {
 
                             var urls = null;
                             if(hasURl) {
-                                _.get(val, "Urls").split(",");
+                                urls = _.get(val, "Urls").split(",");
                             }
 
                             var isTweet = _.get(val, "tweet_type") == "twitter" ? true : false;
