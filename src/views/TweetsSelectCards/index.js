@@ -3,17 +3,18 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
 import {
-	Select,
-	MenuItem,
-	FormControl,
-	InputLabel,
-	Card,
-	CardHeader,
-	CardContent,
-	CardMedia,
-	Typography,
-	Avatar,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Card,
+    CardHeader,
+    CardContent,
+    CardMedia,
+    Typography,
+    Avatar,
 } from "@material-ui/core";
+import { NavigateBeforeSharp } from "@material-ui/icons";
 // core components
 
 export default function TweetsSelectCards({ dataSource, cityArray, classes }) {
@@ -52,8 +53,15 @@ export default function TweetsSelectCards({ dataSource, cityArray, classes }) {
                         dataSource &&
                         dataSource[city] &&
                         _.get(dataSource[city], "tweets").map((val, key) => {
-                            console.log("key", key, val);
-                            var hasURl = _.get(val, "Urls").length >0;
+                            // console.log("key", key, val);
+                            var urlsText = _.get(val, "Urls");
+                            var hasURl = urlsText!=null && _.get(val, "Urls").length >0;
+
+                            var urls = null;
+                            if(hasURl) {
+                                _.get(val, "Urls").split(",");
+                            }
+
                             var isTweet = _.get(val, "tweet_type") == "twitter" ? true : false;
 
                             return (
@@ -81,14 +89,14 @@ export default function TweetsSelectCards({ dataSource, cityArray, classes }) {
                                                 <Typography variant="subtitle2" className="mr-2">
                                                     You can also go to:
                                                 </Typography>{" "}
-                                                <a
-                                                    href={_.get(val, "Urls")}
-                                                    target="_blank"
-                                                    className={classes.block}
 
-                                                >
-                                                    link
-                                                </a>
+                                                {
+
+                                                urls && urls.length > 0 &&
+                                                urls.map(url =>
+                                                        <div><a href={url} target ="_blank" className={classes.block}>link</a> , </div>)
+                                                }
+
                                             </span> }
                                             { isTweet && <span
                                                 style={{
