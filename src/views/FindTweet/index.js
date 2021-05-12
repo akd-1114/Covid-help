@@ -128,7 +128,7 @@ export default function FindTweet() {
                             {loading && (
                                 <CircularProgress size={30} className={classes.progress} />
                             )}
-                            Submit
+                            Search Tweets
                         </Button>
                     </div>
                 </form>
