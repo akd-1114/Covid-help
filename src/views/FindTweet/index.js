@@ -111,7 +111,7 @@ export default function FindTweet() {
                             id="search-tweet"
                             name="search-tweet"
                             type="text"
-                            label="Tweets Search..."
+                            label="Eg: Oxygen, Food, Beds, Testing, Ventilators"
                             className={classes.textField}
                             onChange={handleChange}
                             fullWidth
